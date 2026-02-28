@@ -73,6 +73,11 @@ one to visualize package dependencies. Here is the command line:
 
 `clj -Ttools install io.github.clojure/tools.deps.graph '{:git/tag "v1.1.90"}' :as graph`
 
+## Usings the `deps.edn` file
 
+If we create an empty `deps.edn` file and execute `clj -M -m dep.core`. 
+Interestingly, when I execute this command locally, it works just as 
+before. However, when Vlodomir executes this command in the video, it
+fails with an error: "Error building classpath. Expected edn map in...."
 
 
