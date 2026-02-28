@@ -45,10 +45,34 @@ classpath or supply main opts". It provides access to the clojure
 documentation.)
 
 The Clojure main namespace takes a number of options itself, but we
-will focusing on running scripts and running Clojure namespaces.
+will focusing on running scripts and running Clojure namespaces. For
+example, if we create a file, `src/dev/core.clj` with Clojure code
+defining the `-main` function, we can actually run that code from 
+the command line using `clj -M -m dev.core`. The `-m` option 
+"[c]all[s] the -main function from namespace" with arguments.
 
+## Using the -T (tool) option
 
-- Concatenated aliaso to modify the clas
+One tool is known to `clj` when installed, `tools`. You invoke it 
+by executing the command, `clj -Ttools`. (NOTE: when you run this
+command for the very first time on a system, Clojure will actually
+**download** this tool to your workstation.)
+
+Using `tools` allows access to other sub-commands:
+
+- `list` List tools already installed on your workstation
+- `install` Install a new tool to your workstation
+
+I installed two development tools, `clj-new` and `dep-new`:
+
+- `clojure -Ttools install-latest :lib com.github.seancorfield/clj-new :as clj-new`
+- `clojure -Ttools install-latest :lib io.github.seancorfield/deps-new :as new`
+
+Vlodimir installed a different package, `tools.deps.graphs`. This package helps 
+one to visualize package dependencies. Here is the command line:
+
+`clj -Ttools install io.github.clojure/tools.deps.graph '{:git/tag "v1.1.90"}' :as graph`
+
 
 
 
