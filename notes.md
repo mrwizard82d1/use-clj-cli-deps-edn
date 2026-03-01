@@ -202,7 +202,7 @@ can create an alias for executing this function.
 
 If we add another item to the `aliases` entry of our deps.edn map like:
 
-```
+    ```
 :gen-piechart {:exec-fn reports/generate
                :exec args {:type "piechart"
                            :tables ["users" "customers"]}}
@@ -215,4 +215,16 @@ to execute **and** the arguments to supply to that execution, we
 Instead, we simply write `clj -X:gen-piechart` at the command line
 and the `clj` tool substitutes the details supplied in the 
 `gen-piechart` item of the `aliases` item of the `deps.edn` file.
+
+#### "Universal" aliases
+
+We can create other aliases that are neither tied to the `-M -m` 
+option nor to the `-X` option. These kinds of aliases are called
+"universal" aliases.
+
+For example, we have invoked the cognitect test runner using the
+command, `clj -M -m cognitect.test-runner`. To lessen our typing
+for this command, we can create a `:main-opts` alias as we have
+previously documented.
+
 

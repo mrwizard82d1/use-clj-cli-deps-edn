@@ -15,4 +15,11 @@
                                       :tables ["users" "customers"]}}
            :gen-diagram {:exec-fn reports/generate
                          :exec-args {:type "diagram"
-                                     :tables ["users" "customers"]}}}}
+                                     :tables ["users" "customers"]}}
+           ;; "Universal" aliases (not tied to a specific invocation
+           ;; option)
+
+           ;; Our first attemp simply creates another `:main-opts`
+           ;; alias
+           :test {:main-opts ["-m" "cognitect.test-runner"]}
+           }}
