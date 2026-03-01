@@ -183,4 +183,6 @@ This alias allows use to execute `-main` in the `prod.core` namespace
 by executing the command, `clj -M:prod`. (Note that one **cannot**
 separate the `-M` option and the `:prod` identifier.)
 
+We can create a similar alias to execute `-main` in the `dev.core`
+namespace: `:dev {:main-opts ["-m" "dev.core"]}`.
 
