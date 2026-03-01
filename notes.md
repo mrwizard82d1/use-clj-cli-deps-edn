@@ -73,7 +73,9 @@ one to visualize package dependencies. Here is the command line:
 
 `clj -Ttools install io.github.clojure/tools.deps.graph '{:git/tag "v1.1.90"}' :as graph`
 
-## Usings the `deps.edn` file
+## Using the `deps.edn` file
+
+### Basic usage
 
 We create an empty `deps.edn` file and execute `clj -M -m dep.core`. 
 Interestingly, when I execute this command locally, it works just as 
@@ -104,4 +106,24 @@ Clojure to search for source files. By specifying both "src" and
 "test", we allow Clojure to "find" the `-main` function in 
 the package `core.test`.
 
+### Adding dependencies
 
+Let's add a new library for logging. The video uses the `timbre` 
+library; however, `timbre` has been superseded by `telemere`. 
+(These packages have the same main author.) Although `telemere`
+uses a different (more modern?) approach to logging, it provides
+macros that mimic the `timbre` API. This provision allows 
+`telemere` to be backword compatible with `timbre`.
+
+We can then execute our `-main` function. This execution produces 
+the log message
+
+```
+2026-03-01T00:30:02.299290Z INFO LOG rocky dev.core :taoensso.telemere/timbre Main function called
+```
+
+Similarly, executing our `print-args` funcion produces:
+
+```
+2026-03-01T00:30:52.836162Z INFO LOG rocky dev.core :taoensso.telemere/timbre Passed arguments:  {:k1 "v1"}
+```

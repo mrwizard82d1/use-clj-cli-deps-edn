@@ -1,4 +1,5 @@
-(ns dev.core)
+(ns dev.core
+  (:require [taoensso.telemere.timbre :as log]))
 
 ;; The `-main` function can be run using `clj` by executing:
 ;;
@@ -10,7 +11,7 @@
 ;; command line arguments.
 
 (defn -main []
-  (println "Main function called"))
+  (log/info "Main function called"))
 
 ;; To run this function from the command line, one can use `clj`.
 ;;
@@ -34,4 +35,4 @@
 (defn print-args
   "Print its arguments: a very simple function."
   [args]
-  (println "Passed arguments: " args))
+  (log/info "Passed arguments: " args))
