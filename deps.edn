@@ -4,5 +4,15 @@
         io.github.cognitect-labs/test-runner
         {:git/tag "v0.5.1" :git/sha "dfb30dd"}}
 
- :aliases {:prod {:main-opts ["-m" "prod.core"]}
-           :dev {:main-opts ["-m" "dev.core"]}}}
+ :aliases {
+           ;; Aliases for `clj -M -m ...`
+           :prod {:main-opts ["-m" "prod.core"]}
+           :dev {:main-opts ["-m" "dev.core"]}
+
+           ;; Aliases for `clj -X ...`
+           :gen-piechart {:exec-fn reports/generate
+                          :exec-args {:type   "piechart"
+                                      :tables ["users" "customers"]}}
+           :gen-diagram {:exec-fn reports/generate
+                         :exec-args {:type "diagram"
+                                     :tables ["users" "customers"]}}}}

@@ -157,6 +157,8 @@ But we can also make it pass. Success!
 Aliases allow us to significantly reduce the amount of typing we 
 must perform at the command line.
 
+#### Aliases for `:main-opts` (`-m`)
+
 Suppose we wanted to run our code both in a `dev` environment and
 in a `prod` environment. How might aliases make our lives easier?
 
@@ -185,4 +187,32 @@ separate the `-M` option and the `:prod` identifier.)
 
 We can create a similar alias to execute `-main` in the `dev.core`
 namespace: `:dev {:main-opts ["-m" "dev.core"]}`.
+
+#### Aliases for `-X`
+
+We can additionally specify aliases for executing code from the 
+command line using the `-X` option. For example, suppose we write
+a module named 'reports' with a function, `generate`. Without an
+alias, to execute this function, our command line is:
+
+`clj -X reports/generate :type "piechart" :tables "["users" "customers"]"`
+
+Typing these kinds of commands repeatedly is taxing. However, we
+can create an alias for executing this function.
+
+If we add another item to the `aliases` entry of our deps.edn map like:
+
+```
+:gen-piechart {:exec-fn reports/generate
+               :exec args {:type "piechart"
+                           :tables ["users" "customers"]}}
+```
+
+This entry creates an alias for executing the `reports/generate` 
+function with specific arguments. By specifying both the function
+to execute **and** the arguments to supply to that execution, we
+**do not need** to specify all these details on the command line.
+Instead, we simply write `clj -X:gen-piechart` at the command line
+and the `clj` tool substitutes the details supplied in the 
+`gen-piechart` item of the `aliases` item of the `deps.edn` file.
 
