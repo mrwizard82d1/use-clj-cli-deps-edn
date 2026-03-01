@@ -90,5 +90,18 @@ command, `clj -M -m core-test`, we see an error:
 > Execution error (FileNotFoundException) at....
 > Could not locate ... on classpath... Please check....
 
+We correct this error by configuring the `:paths` value in our 
+configuration; that is:
+
+`{:paths ["src" "test"]}`
+
+Now, when we executing `clj -M -m core-test`, the program successfully 
+prints the message, "Testing in progress."
+
+Remember, by default, actually because of higher level `deps.edn` 
+configuration, the path "src" is added to the Java classpath used by 
+Clojure to search for source files. By specifying both "src" and 
+"test", we allow Clojure to "find" the `-main` function in 
+the package `core.test`.
 
 
