@@ -127,3 +127,24 @@ Similarly, executing our `print-args` funcion produces:
 ```
 2026-03-01T00:30:52.836162Z INFO LOG rocky dev.core :taoensso.telemere/timbre Passed arguments:  {:k1 "v1"}
 ```
+
+#### Referencing Dependencies on GitHub
+
+The `deps` key in the `deps.edn` file allows us to not only reference 
+files available from Maven (and, I assume, Clojars), but to also 
+reference packages (only) available on GitHub. When identifying a
+package on GitHub, one must specify both a **tag** and a SHA to 
+unambigously identify the version.
+
+This particular package contains code that is **not** referenced in
+source code but can be used from the command line. For example, this
+command uses the Cognitect test runner to **find** and execute our 
+"simple" tests.
+
+We invoke this test runner with the command, 
+`clj -M -m cognitect.test-runner`. This test runner will find and
+execute our tests. However, we currently have no tests in our 
+single test file, `test/core-test.clj`. Consequently, we see the 
+general test output; however, it specifically reports 
+"Ran 0 tests containing 0 assertions."
+
