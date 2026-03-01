@@ -254,3 +254,20 @@ needed by `:test` are now all **self-contained**; that is, the
 `:test` target contains not only the command line to execute but
 all the additional dependencies needed **only** by this execution.
 
+## Additional `clj` commands
+
+We have focused on the project-specific `deps.edn` file; however, 
+other `deps.edn` files exist (and other details of our environment).
+If we execute the command, `clj -Sdescribe`, we instruct the system 
+to print out this additional information.
+
+For example, running this command prints out the entry:
+
+```
+:config-files 
+["/opt/homebrew/Cellar/clojure/1.12.4.1602/deps.edn" "/Users/larry/.clojure/deps.edn" "deps.edn" ]
+```
+
+The value of this key identifies all the `deps.edn` files that will be 
+combined before executing different `clj` (sub-)commands.
+
