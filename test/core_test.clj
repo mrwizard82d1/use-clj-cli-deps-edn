@@ -13,4 +13,4 @@
 
 ;; Let's add a very simple test
 (t/deftest always-true
-  (t/is false))
+  (t/is true))
