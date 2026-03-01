@@ -75,9 +75,20 @@ one to visualize package dependencies. Here is the command line:
 
 ## Usings the `deps.edn` file
 
-If we create an empty `deps.edn` file and execute `clj -M -m dep.core`. 
+We create an empty `deps.edn` file and execute `clj -M -m dep.core`. 
 Interestingly, when I execute this command locally, it works just as 
 before. However, when Vlodomir executes this command in the video, it
 fails with an error: "Error building classpath. Expected edn map in...."
+
+Adding an empty configuration (`{)`) to `deps.edn` repairs the error in 
+the video.
+
+Suppose we add a `test` directory and create a file, `core-test.clj`. 
+If we add a `-main` function to this file and try to run it with the 
+command, `clj -M -m core-test`, we see an error:
+
+> Execution error (FileNotFoundException) at....
+> Could not locate ... on classpath... Please check....
+
 
 
