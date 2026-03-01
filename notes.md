@@ -227,4 +227,30 @@ command, `clj -M -m cognitect.test-runner`. To lessen our typing
 for this command, we can create a `:main-opts` alias as we have
 previously documented.
 
+However, we can "do better." Invoking the cognitect test runner
+requires that we include a dependency to find the test runner. 
+This dependency is included **all the time** but it is only needed
+to run our tests. A "universal" alias allows us to only reference
+this dependency for invocations that **need** it.
+
+For example, we add the `:extra-paths` key to our `:test` map. The
+value of this key will be "test". This key-value pair effectively 
+adds "test" to the source paths search but **only** for this 
+specific invocation.
+
+Similarly, we can add the `:extra-deps` key to our `:test` map. The
+value of this key will be the GitHub details identifying the 
+test runner code that we need. In our case, the value of the 
+`:extra-deps` key will be
+
+```
+io.github.cognitect-labs/test-runner 
+{:git/tag "v0.5.1" :git/sha "dfb30dd"}
+```
+
+Now, we can run our tests using the cognitect test runner by 
+executing the command, `clj -M:test`; however, the dependendies
+needed by `:test` are now all **self-contained**; that is, the
+`:test` target contains not only the command line to execute but
+all the additional dependencies needed **only** by this execution.
 
