@@ -148,3 +148,5 @@ single test file, `test/core-test.clj`. Consequently, we see the
 general test output; however, it specifically reports 
 "Ran 0 tests containing 0 assertions."
 
+When we write a failing test, it actually fails!
+

@@ -1,5 +1,5 @@
 (ns core-test
-  (:require  [clojure.test :as t]))
+  (:require [clojure.test :as t]))
 
 ;; We will add a very simple `-main` function to our `core-test`
 ;; namespace and try to run this function.
@@ -10,3 +10,7 @@
 
 (defn -main []
   (println "Testing in progress."))
+
+;; Let's add a very simple test
+(t/deftest always-true
+  (t/is false))
