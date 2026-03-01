@@ -4,4 +4,4 @@
         io.github.cognitect-labs/test-runner
         {:git/tag "v0.5.1" :git/sha "dfb30dd"}}
 
- :aliases {}}
+ :aliases {:prod {:main-opts ["-m" "prod.core"]}}}

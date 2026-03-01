@@ -172,7 +172,15 @@ We can run these two `-main` functions by executing:
 from the root of our project. When run, they print out the expected
 messages. However, we must (correctly!) type out each of these 
 commands. Can we use the `aliases` entry of `deps.edn` to simplify
-executing these two commands?
+executing these two commands? Again, "Yes."
 
+We create an alias to execute `-main` in `prod.core` by adding the 
+following item to the `aliases` map
+
+`:prod {:main-opts ["-m" "prod.core"]}`
+
+This alias allows use to execute `-main` in the `prod.core` namespace
+by executing the command, `clj -M:prod`. (Note that one **cannot**
+separate the `-M` option and the `:prod` identifier.)
 
 
