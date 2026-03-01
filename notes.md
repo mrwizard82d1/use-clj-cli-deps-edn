@@ -152,4 +152,27 @@ When we write a failing test, it actually fails!
 
 But we can also make it pass. Success!
 
+### Aliases
+
+Aliases allow us to significantly reduce the amount of typing we 
+must perform at the command line.
+
+Suppose we wanted to run our code both in a `dev` environment and
+in a `prod` environment. How might aliases make our lives easier?
+
+We'll create a `src/prod` directory and copy `dev/core.clj` into 
+`src/prod`. We'll then change both `core.clj` files to include the 
+environment name in the text logged from the `-main` function. 
+
+We can run these two `-main` functions by executing:
+
+- `clj -M -m dev.core` and
+- `clj -M -m prod.core`
+
+from the root of our project. When run, they print out the expected
+messages. However, we must (correctly!) type out each of these 
+commands. Can we use the `aliases` entry of `deps.edn` to simplify
+executing these two commands?
+
+
 

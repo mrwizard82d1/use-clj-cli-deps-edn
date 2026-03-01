@@ -11,7 +11,7 @@
 ;; command line arguments.
 
 (defn -main []
-  (log/info "Main function called"))
+  (log/info "DEV main function called"))
 
 ;; To run this function from the command line, one can use `clj`.
 ;;
