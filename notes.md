@@ -271,3 +271,82 @@ For example, running this command prints out the entry:
 The value of this key identifies all the `deps.edn` files that will be 
 combined before executing different `clj` (sub-)commands.
 
+## Understanding `tools.deps`
+
+The `tools.deps` library does all the "heavy lifting" when running `clj`.
+Specifically, it invokes `resolve-deps` to resolve dependencies and it 
+invokes `make-classpath-map` to determine where to search for files
+at runtime.
+
+For example, `clj` resolves all our dependencies by evaluating the
+expression, `(resolve-deps deps args-map)`. The `deps` argument has
+the value of the `:deps` key in the `deps.edn` file. The value of
+`args-map` is the map of **all** additional dependencies specified 
+in an alias. For example:
+
+```
+:alias {my-alias {:extra-deps {...}
+                  :override-deps {...}
+                  :default-deps {...}
+                  :replace-deps {...}}}
+```
+
+As discussed earlier, 
+
+- `:extra-deps` "extra" dependencies specific to this alias
+- `:override-deps` allows us to override one version of a dependency 
+  with another version.
+- `:default-deps` what dependencies should be used if no dependency
+  is specified in `:deps` itself
+- `:replace-deps` allows one to **ignore** a dependency in `:deps`
+  using instead the dependencies specified in the value of this 
+  key instead
+  
+The value produced by the invocation of `resolve-deps` is a library 
+map (`lib-map`). This value is supplied as the `lib-map` argument
+to `make-classpath-map`. 
+
+The `make-classpath-map` function is invoked as:
+
+```
+(make-classpath-map lib-map path args-map)
+```
+
+The arguments passed to `make-classpath-map` are:
+
+- `lib-map` The result of invoking `resolve-deps` above
+- `paths` The value of the `:paths` key in `deps.edn` along with
+   values of the following keys
+  - `:extra-paths` Described previously in this video
+  - `:classpath-overrides` Specify a library with its 
+    **alternate** location (for example, a test library)
+  - `:replace-paths` Allows one to ignore all previous information
+    about a path and use its replacement.
+- `args-map` Not described in this video 
+
+Eventually, `clj` (probably other functions invoked by `clj`)
+will use a classpath calculated from the value (a map?) returned 
+by `make-classpath-map`
+
+### Printing the calculated classpath
+
+NOTE: If you want to calculate the classpath used when invoking 
+an alias, use the `-Spath` option of the `clj` command. For 
+example, executing `clj -Spath -M:dev` will print the calculated
+classpath used when executing the `:dev` alias.
+
+Similarly, executing `clj -Spath -M:test` will print the classpath
+used when running our tests.
+
+## Next steps
+
+You now have a better understanding of the `clj` tool and its options. 
+You can continue learning by invoking `clj --help` and by looking at
+the official documentation. For example, the
+[Deps and CLI Guide](https://clojure.org/guides/deps_and_cli).
+
+Additionally, now that you can build your project successfully, you
+may want to package it into jars and uberjars. Another video, 
+[Packaging Clojure Projects](https://www.youtube.com/watch?v=OgV-ALpmXUI),
+describes how to use `tools.build` to perform these tasks.
+
